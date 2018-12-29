@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const app = express()
-const UserModel = require('./model/model')
+// const UserModel = require('./model/model')
 
 const debug = require('debug')('app')
 

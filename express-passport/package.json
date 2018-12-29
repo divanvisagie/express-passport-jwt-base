@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=app,app:* nodemon app.js",
-    "postman": "newman run postman-collection/PassportExpress.postman_collection.json"
+    "postman": "newman run postman-collection/collection.json"
   },
   "dependencies": {
     "bcrypt": "^3.0.3",

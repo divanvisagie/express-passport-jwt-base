@@ -39,7 +39,7 @@
 					"raw": "{\n\t\"email\": \"{{$timestamp}}@gmail.com\",\n\t\"password\": \"test\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/signup?email=bob@gmail.com&password=test",
+					"raw": "http://localhost:3000/signup",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -47,16 +47,6 @@
 					"port": "3000",
 					"path": [
 						"signup"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "bob@gmail.com"
-						},
-						{
-							"key": "password",
-							"value": "test"
-						}
 					]
 				}
 			},

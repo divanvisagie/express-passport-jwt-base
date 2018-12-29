@@ -8,6 +8,8 @@ const config = require('./src/config/config')
 
 const debug = require('debug')('app')
 
+const {requiresToken} = require('./src/auth/filters')
+
 
 mongoose.connect(config.mongoUrl, { 
     useNewUrlParser: true 
@@ -24,7 +26,7 @@ const authentication = require('./src/routes/authentication')
 const user = require('./src/routes/user')
 
 app.use('/', authentication)
-app.use('/user', passport.authenticate('jwt', {session: false}), user)
+app.use('/user', requiresToken , user)
 
 //error handler
 app.use((err, req, res) => {

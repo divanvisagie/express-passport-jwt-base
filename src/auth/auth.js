@@ -5,6 +5,8 @@ const UserModel = require('../model/user-model')
 const  JWTStrategy = require('passport-jwt').Strategy
 const  ExtractJWT = require('passport-jwt').ExtractJwt
 
+const debug = require('debug')('auth')
+
 passport.use(new JWTStrategy({
     secretOrKey: 'my-secret',
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
@@ -35,20 +37,21 @@ passport.use('login', new localStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, async (email, password, done) => {
+    const passwordErrorMessage = 'Username or password incorrect'
     try {
         const user = await UserModel.findOne({ email })
         if (!user) {
-            debug('incorrect username')
-            return done(null, false, {message: 'Username or password incorrect'})
+            debug('Incorrect username')
+            return done(null, false, { message: passwordErrorMessage })
         }
 
         const validate = await user.isValidPassword(password)
         if (!validate) {
-            debug('incorrect password')
-            return done(null, false, {message: 'Username or password incorrect'})
+            debug('Incorrect password')
+            return done(null, false, { message: passwordErrorMessage })
         }
 
-        return done(null, user, {message: 'Logged in successfully'})
+        return done(null, user, { message: 'Logged in successfully' })
     } catch (e) {
         return done(e)
     }

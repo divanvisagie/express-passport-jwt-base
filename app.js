@@ -20,10 +20,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
 const authentication = require('./src/routes/authentication')
-const secureRoutes = require('./src/routes/user')
+const user = require('./src/routes/user')
 
 app.use('/', authentication)
-app.use('/user', passport.authenticate('jwt', {session: false}), secureRoutes)
+app.use('/user', passport.authenticate('jwt', {session: false}), user)
 
 //error handler
 app.use((err, req, res, next) => {

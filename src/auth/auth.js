@@ -5,10 +5,12 @@ const UserModel = require('../model/user-model')
 const  JWTStrategy = require('passport-jwt').Strategy
 const  ExtractJWT = require('passport-jwt').ExtractJwt
 
+const config = require('../config/config')
+
 const debug = require('debug')('auth')
 
 passport.use(new JWTStrategy({
-    secretOrKey: 'my-secret',
+    secretOrKey: config.jwtSecret,
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
 }, async (token, done) => {
     try {

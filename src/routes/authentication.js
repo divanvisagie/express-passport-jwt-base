@@ -3,7 +3,7 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
 const router = express.Router()
-const secret = 'my-secret'
+const secret = require('../config/config').jwtSecret
 
 const debug = require('debug')('app:routes/authentication')
 

@@ -7,5 +7,6 @@ const mongoUrl = `mongodb://${mongoName}:${mongoPort}/${mongoDatabaseName}`
 
 module.exports = {
     port: process.env.PORT || 3000,
-    mongoUrl
+    mongoUrl,
+    jwtSecret: process.env.JWT_SECRET || 'my-secret'
 }

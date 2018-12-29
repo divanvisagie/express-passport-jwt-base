@@ -31,7 +31,7 @@ UserSchema.methods.isValidPassword = async function(password) {
     if (!valid) {
         debug(`${user.email} attempted login with invalid password`)
     }
-    return valid;
+    return valid
 }
 
 const UserModel = mongoose.model('user', UserSchema)

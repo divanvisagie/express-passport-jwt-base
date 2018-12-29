@@ -4,11 +4,12 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const app = express()
 
+const config = require('./src/config/config')
+
 const debug = require('debug')('app')
 
-const port = 3000
 
-mongoose.connect('mongodb://localhost:27017/express-passport', { 
+mongoose.connect(config.mongoUrl, { 
     useNewUrlParser: true 
 })
 mongoose.connection.on('error', error => debug(error))
@@ -31,6 +32,6 @@ app.use((err, req, res) => {
     res.json({error: err})
 }) 
 
-app.listen(port, () => {
-    debug(`Server started on port ${port}`)
+app.listen(config.port, () => {
+    debug(`Server started on port ${config.port}`)
 })

@@ -20,7 +20,6 @@ router.post('/login', async (req, res, next) => {
         debug('Login info parameter says', info)
         try {
             if (err || !user) {
-                const error = new Error('An Error occured')
                 debug('Could not auth user',user, 'becaues of error', err)
                 return res.sendStatus(401)
             }
@@ -39,4 +38,4 @@ router.post('/login', async (req, res, next) => {
     })(req,res,next)
 })
 
-module.exports = router;
+module.exports = router

@@ -8,6 +8,7 @@ const secret = 'my-secret'
 const debug = require('debug')('app:routes')
 
 router.post('/signup', passport.authenticate('signup', {session: false}), async (req, res) => {
+    debug('signup')
     res.json({
         message : 'Signup successful',
         user: req.user

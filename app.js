@@ -10,9 +10,13 @@ const debug = require('debug')('app')
 
 const {requiresToken} = require('./src/auth/filters')
 
+const log = require('./src/logging/log')
+
 
 mongoose.connect(config.mongoUrl, { 
     useNewUrlParser: true 
+}).catch(e => {
+    log.error('Error while connecting to mongo', e)
 })
 mongoose.connection.on('error', error => debug(error))
 mongoose.Promise = global.Promise

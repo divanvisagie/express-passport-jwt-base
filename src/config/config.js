@@ -1,3 +1,6 @@
+const winston = require('winston')
+
+winston.level = process.env.LOG_LEVEL || 'debug'
 
 const mongoName = process.env.MONGO_NAME || 'localhost'
 const mongoPort = process.env.MONGO_PORT || 27017

@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken')
 const router = express.Router()
 const secret = require('../config/config').jwtSecret
 
+const log = require('../logging/log')
+
 const debug = require('debug')('app:routes/authentication')
 
 router.post('/signup', passport.authenticate('signup', {session: false}), async (req, res) => {
@@ -32,6 +34,7 @@ router.post('/login', async (req, res, next) => {
                 return res.json({token})
             })
         } catch(error) {
+            log.warn('Could not perform login', error)
             return next(error)
         }
 

@@ -3,6 +3,8 @@ const debug = require('debug')('app:user-model')
 const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema
 
+const log = require('../logging/log')
+
 const UserSchema = new Schema({
     email: {
         type: String,
@@ -18,9 +20,8 @@ const UserSchema = new Schema({
 // Hook that encrypts the password before save
 UserSchema.pre('save', async function(next) {
     const user = this //not a fan of this, need to find a better way
-    debug('User in this context is', user)
-    const hash = await bcrypt.hash(this.password, 10)
-    this.password = hash
+    const hash = await bcrypt.hash(user.password, 10)
+    user.password = hash
     next()
 })
 
@@ -29,7 +30,7 @@ UserSchema.methods.isValidPassword = async function(password) {
 
     const valid = await bcrypt.compare(password, user.password)
     if (!valid) {
-        debug(`${user.email} attempted login with invalid password`)
+        log.info(`User attempted login with invalid password`)
     }
     return valid
 }
